@@ -1,0 +1,47 @@
+<div class="catalog-container">
+    <!-- Barra de filtros -->
+    <aside class="filter-sidebar">
+        <h3>Filtrar por</h3>
+
+        <label>Buscar modelo</label>
+        <input type="text" placeholder="🔍 Buscar..." [(ngModel)]="filtroTexto" />
+
+        <label>Tipo</label>
+        <select [(ngModel)]="filtroTipo">
+            <option value="">Todos</option>
+            <option *ngFor="let tipo of tiposDisponibles" [value]="tipo">
+                {{ tipo }}
+            </option>
+        </select>
+
+        <label>Ordenar por precio</label>
+        <select [(ngModel)]="ordenPrecio">
+            <option value="">Seleccione</option>
+            <option value="asc">Menor a mayor</option>
+            <option value="desc">Mayor a menor</option>
+        </select>
+    </aside>
+
+    <!-- Listado de productos -->
+    <section class="products-grid">
+        <h2>📱 Últimos dispositivos</h2>
+
+        <div class="cards-grid">
+            <div *ngFor="let dispositivo of dispositivosFiltrados" class="card">
+                <div class="card-img">
+                    <img [src]="dispositivo.imagen_principal || 'assets/no-image.png'" alt="{{ dispositivo.modelo }}">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ dispositivo.modelo }}</h3>
+                    <p class="card-subtitle">{{ dispositivo.tipo }}</p>
+                    <p class="card-price">
+                        ${{ dispositivo.precio | number }}
+                    </p>
+                    <a [routerLink]="['/dispositivos', dispositivo.id_dispositivo]" class="btn-details">
+                        Ver detalles
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

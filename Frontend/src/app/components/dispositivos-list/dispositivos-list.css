@@ -1,0 +1,106 @@
+/* Contenedor principal */
+.catalog-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Filtros */
+.filter-sidebar {
+  background: #fff;
+  padding: 15px;
+  border: 2px solid #007bff;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.6);
+  border-radius: 10px;
+}
+
+.filter-sidebar h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.filter-sidebar label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.filter-sidebar input,
+.filter-sidebar select {
+  width: 90%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Productos */
+.products-grid h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+/* Cards estilo Alkosto/Ktronix */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Imagen producto */
+.card-img img {
+  max-width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+
+/* Texto */
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #555;
+}
+
+.card-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e60000; /* Rojo tipo Alkosto */
+  margin: 10px 0;
+}
+
+/* Botón */
+.btn-details {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #0066cc;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-details:hover {
+  background: #004999;
+}
