@@ -1,0 +1,77 @@
+🚀 Guía de instalación del proyecto
+1. Importar base de datos en PostgreSQL
+
+Instalar PostgreSQL en el nuevo PC (si no está instalado).
+
+Abrir pgAdmin o la terminal de PostgreSQL.
+
+Crear una base de datos nueva (ejemplo: proyecto_db).
+
+CREATE DATABASE proyecto_db;
+
+
+Copiar el archivo .sql que está en la carpeta db/ del proyecto.
+
+Ejecutar el script para cargar las tablas y datos:
+
+psql -U tu_usuario -d proyecto_db -f ruta/al/archivo.sql
+
+
+(Reemplazar tu_usuario por el usuario de PostgreSQL y ruta/al/archivo.sql por la ubicación real).
+
+2. Iniciar el Back-end (Node.js)
+
+Instalar Node.js (versión recomendada: LTS).
+
+Abrir la carpeta del backend:
+
+cd backend
+
+
+Instalar dependencias:
+
+npm install
+
+
+Configurar variables de entorno:
+
+Crear archivo .env en la carpeta backend con el siguiente contenido:
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=tu_usuario
+DB_PASSWORD=tu_contraseña
+DB_NAME=proyecto_db
+PORT=3000
+
+
+Iniciar el servidor:
+
+npm start
+
+
+El backend estará disponible en http://localhost:3000.
+
+3. Iniciar el Front-end (Angular)
+
+Instalar Angular CLI globalmente (si no está instalado):
+
+npm install -g @angular/cli
+
+
+Abrir la carpeta del frontend:
+
+cd frontend
+
+
+Instalar dependencias:
+
+npm install
+
+
+Ejecutar el servidor de desarrollo:
+
+ng serve -o
+
+
+El frontend se abrirá automáticamente en el navegador en http://localhost:4200.
