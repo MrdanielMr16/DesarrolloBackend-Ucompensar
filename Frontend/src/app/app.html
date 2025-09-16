@@ -2,6 +2,15 @@
 
 <nav>
     <a routerLink="/">Lista de Dispositivos</a>
+
+    <!-- Botón Iniciar sesión -->
+    <button *ngIf="!auth.isLoggedIn()" class="login-btn" (click)="goLogin()">Iniciar sesión</button>
+
+    <!-- Mostrar si está logueado -->
+    <span *ngIf="auth.isLoggedIn()">
+        Bienvenido, {{ auth.getUser()?.email }}
+        <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    </span>
 </nav>
 
 <hr>
