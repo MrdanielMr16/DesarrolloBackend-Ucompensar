@@ -55,4 +55,20 @@ export class DispositivosListComponent implements OnInit {
     return lista;
   }
 
+  eliminarDispositivo(id: number): void {
+    if (confirm('¿Seguro que quieres eliminar este dispositivo?')) {
+      this.dispositivoService.deleteDispositivo(id).subscribe(() => {
+        this.dispositivos = this.dispositivos.filter(d => d.id_dispositivo !== id);
+      });
+    }
+  }
+
+  editarDispositivo(id: number): void {
+    // aquí solo navegamos al formulario para actualizar
+    // puedes enviar el ID en la ruta
+    window.location.href = `/dispositivos/editar/${id}`;
+  }
+
 }
+
+

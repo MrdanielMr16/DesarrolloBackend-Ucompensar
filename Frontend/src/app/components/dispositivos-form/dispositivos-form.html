@@ -1,0 +1,38 @@
+<div class="form-container">
+    <h2>{{ editMode ? 'Editar dispositivo' : 'Agregar nuevo dispositivo' }}</h2>
+
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <label>Marca:</label>
+        <input type="text" [(ngModel)]="nuevoDispositivo.marca" name="marca" required />
+
+        <label>Modelo:</label>
+        <input type="text" [(ngModel)]="nuevoDispositivo.modelo" name="modelo" required />
+
+        <label>Tipo:</label>
+        <select [(ngModel)]="nuevoDispositivo.tipo" name="tipo" required>
+            <option value="Portátil">Portátil</option>
+            <option value="Tablet">Tablet</option>
+            <option value="Celular">Celular</option>
+        </select>
+
+        <label>Fecha de lanzamiento:</label>
+        <input type="date" [(ngModel)]="nuevoDispositivo.fecha_lanzamiento" name="fecha" required />
+
+        <label>Precio:</label>
+        <input type="number" [(ngModel)]="nuevoDispositivo.precio" name="precio" required />
+
+        <label>Especificaciones:</label>
+        <textarea [(ngModel)]="nuevoDispositivo.especificaciones" name="especificaciones"></textarea>
+
+        <label>Imágenes (URLs separadas por coma):</label>
+        <input type="text" [(ngModel)]="imagenesInput" name="imagenes"
+            placeholder="http://ejemplo.com/img1.jpg, http://ejemplo.com/img2.jpg" />
+
+        <!-- Botón dinámico -->
+        <button type="submit" [disabled]="form.invalid">
+            {{ editMode ? 'Actualizar' : 'Guardar' }}
+        </button>
+    </form>
+
+    <button type="button" class="volver-btn" (click)="goBack()">⬅ Volver a la lista</button>
+</div>

@@ -21,11 +21,14 @@
             <option value="desc">Mayor a menor</option>
         </select>
     </aside>
-
     <!-- Listado de productos -->
     <section class="products-grid">
         <h2>📱 Últimos dispositivos</h2>
+        <button routerLink="/dispositivos/nuevo" class="btn-add">➕ Agregar nuevo dispositivo</button>
 
+        <div class="cards-grid">
+            <!-- tus tarjetas -->
+        </div>
         <div class="cards-grid">
             <div *ngFor="let dispositivo of dispositivosFiltrados" class="card">
                 <div class="card-img">
@@ -40,6 +43,9 @@
                     <a [routerLink]="['/dispositivos', dispositivo.id_dispositivo]" class="btn-details">
                         Ver detalles
                     </a>
+                    <button (click)="editarDispositivo(dispositivo.id_dispositivo)" class="btn-edit">✏ Editar</button>
+                    <button (click)="eliminarDispositivo(dispositivo.id_dispositivo)" class="btn-delete">🗑
+                        Eliminar</button>
                 </div>
             </div>
         </div>

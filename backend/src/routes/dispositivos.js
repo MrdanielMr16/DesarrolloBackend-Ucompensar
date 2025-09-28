@@ -75,4 +75,93 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Crear un dispositivo
+router.post("/", async (req, res) => {
+  try {
+    const { marca, modelo, tipo, fecha_lanzamiento, precio, especificaciones } =
+      req.body;
+
+    const result = await pool.query(
+      `INSERT INTO dispositivos (marca, modelo, tipo, fecha_lanzamiento, precio, especificaciones) 
+       VALUES ($1, $2, $3, $4, $5, $6) 
+       RETURNING *`,
+      [marca, modelo, tipo, fecha_lanzamiento, precio, especificaciones]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error al crear dispositivo" });
+  }
+});
+
+// Subir imágenes a un dispositivo
+router.post("/:id/imagenes", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { urls } = req.body; // array de URLs o strings de imágenes
+
+    const inserts = urls.map((url) =>
+      pool.query(
+        `INSERT INTO imagenes_dispositivo (id_dispositivo, url) VALUES ($1, $2)`,
+        [id, url]
+      )
+    );
+
+    await Promise.all(inserts);
+
+    res.status(201).json({ message: "✅ Imágenes agregadas correctamente" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error al subir imágenes" });
+  }
+});
+
+// Actualizar un dispositivo
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { marca, modelo, tipo, fecha_lanzamiento, precio, especificaciones } =
+      req.body;
+
+    const result = await pool.query(
+      `UPDATE dispositivos 
+       SET marca = $1, modelo = $2, tipo = $3, fecha_lanzamiento = $4, precio = $5, especificaciones = $6
+       WHERE id_dispositivo = $7
+       RETURNING *`,
+      [marca, modelo, tipo, fecha_lanzamiento, precio, especificaciones, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Dispositivo no encontrado" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error al actualizar dispositivo" });
+  }
+});
+
+// Eliminar un dispositivo
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      "DELETE FROM dispositivos WHERE id_dispositivo = $1 RETURNING *",
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Dispositivo no encontrado" });
+    }
+
+    res.json({ message: "✅ Dispositivo eliminado correctamente" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error al eliminar dispositivo" });
+  }
+});
+
 module.exports = router;
